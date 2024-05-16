@@ -1,0 +1,30 @@
+{
+  "name": "core",
+  "private": true,
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "format:check": "prettier -c \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "lint:fix": "yarn lint --fix",
+    "ts:check": "tsc --noEmit",
+    "check": "yarn format:check && yarn lint && yarn ts:check",
+    "fix": "yarn format && yarn lint:fix"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.70.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "eslint": "^8.7.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^3.2.5",
+    "react": "18.2.0",
+    "react-native": "0.74.1",
+    "typescript": "^5.4.5"
+  }
+}
