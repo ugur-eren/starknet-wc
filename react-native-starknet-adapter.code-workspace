@@ -8,6 +8,10 @@
       "name": "Core",
       "path": "packages/core",
     },
+    {
+      "name": "React Native",
+      "path": "packages/react-native",
+    },
   ],
   "settings": {
     "editor.formatOnSave": true,

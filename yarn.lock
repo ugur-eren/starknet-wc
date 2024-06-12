@@ -3672,22 +3672,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "core@workspace:packages/core"
   dependencies:
-    "@types/react": "npm:^18.2.0"
     "@walletconnect/sign-client": "npm:^2.13.0"
     "@walletconnect/types": "npm:^2.13.0"
     eslint: "npm:^8.7.0"
-    eslint-plugin-jsx-a11y: "npm:^6.5.1"
-    eslint-plugin-react: "npm:^7.28.0"
-    eslint-plugin-react-hooks: "npm:^4.3.0"
     eventemitter3: "npm:^5.0.1"
     get-starknet-core: "npm:4.0.0-next.2"
     prettier: "npm:^3.2.5"
-    react: "npm:18.2.0"
-    react-native: "npm:0.74.1"
     starknet: "npm:5.24.3"
     typescript: "npm:^5.4.5"
   peerDependencies:
-    react-native: ">=0.70.0"
     starknet: ">=5.0.0"
   languageName: unknown
   linkType: soft
@@ -7869,6 +7862,27 @@ __metadata:
   checksum: 10c0/af7666150638ee10abf58cddeaa40a89223959c8726c983ff5ddc231342315658dde065ee16ddae9d7d3c2eb41005bc055367ad899f70dffe82db66419a13e84
   languageName: node
   linkType: hard
+
+"react-native@workspace:packages/react-native":
+  version: 0.0.0-use.local
+  resolution: "react-native@workspace:packages/react-native"
+  dependencies:
+    "@types/react": "npm:^18.2.0"
+    "@walletconnect/types": "npm:^2.13.0"
+    eslint: "npm:^8.7.0"
+    eslint-plugin-jsx-a11y: "npm:^6.5.1"
+    eslint-plugin-react: "npm:^7.28.0"
+    eslint-plugin-react-hooks: "npm:^4.3.0"
+    prettier: "npm:^3.2.5"
+    react: "npm:18.2.0"
+    react-native: "npm:0.74.1"
+    starknet: "npm:5.24.3"
+    typescript: "npm:^5.4.5"
+  peerDependencies:
+    react-native: ">=0.70.0"
+    starknet: ">=5.0.0"
+  languageName: unknown
+  linkType: soft
 
 "react-refresh@npm:^0.14.0":
   version: 0.14.0
