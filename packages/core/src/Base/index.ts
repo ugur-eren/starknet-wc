@@ -44,7 +44,7 @@ export abstract class Connector extends EventEmitter<ConnectorEvents> {
   /** Disconnect wallet. */
   abstract disconnect(): Promise<void>;
   /** Get current account. */
-  abstract account(): Promise<AccountInterface>;
+  abstract account(): Promise<AccountInterface | undefined>;
   /** Get current chain id. */
   abstract chainId(): Promise<bigint>;
 }

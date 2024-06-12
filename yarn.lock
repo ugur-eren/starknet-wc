@@ -1369,22 +1369,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@module-federation/runtime@npm:^0.1.2":
-  version: 0.1.13
-  resolution: "@module-federation/runtime@npm:0.1.13"
-  dependencies:
-    "@module-federation/sdk": "npm:0.1.13"
-  checksum: 10c0/0460daf42bc855303e1f005f08ecd5e316005a3c25657f81c1da2b2f7c9a0eb1e229350d88a73208f23fdf60cf7cf024c33ad2ad62215da6f3a89e7eaaf7ef6d
-  languageName: node
-  linkType: hard
-
-"@module-federation/sdk@npm:0.1.13":
-  version: 0.1.13
-  resolution: "@module-federation/sdk@npm:0.1.13"
-  checksum: 10c0/4de3b9307db635d15f8f13029c9d8be71e54f4a11b202980c18d2779631b7f35ecc4a4ed60136e61fe1307e072bc8a743f790518df2f05356b748d42be46c937
-  languageName: node
-  linkType: hard
-
 "@noble/curves@npm:~1.2.0":
   version: 1.2.0
   resolution: "@noble/curves@npm:1.2.0"
@@ -3696,7 +3680,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.28.0"
     eslint-plugin-react-hooks: "npm:^4.3.0"
     eventemitter3: "npm:^5.0.1"
-    get-starknet-core: "npm:^3.3.0"
+    get-starknet-core: "npm:4.0.0-next.2"
     prettier: "npm:^3.2.5"
     react: "npm:18.2.0"
     react-native: "npm:0.74.1"
@@ -5012,17 +4996,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-starknet-core@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "get-starknet-core@npm:3.3.0"
-  dependencies:
-    "@module-federation/runtime": "npm:^0.1.2"
-  peerDependencies:
-    starknet: ^5.18.0
-  peerDependenciesMeta:
-    starknet:
-      optional: false
-  checksum: 10c0/f68904064f0fd3d58f5a47e90194d7b0afa612b7f32bba710ab83202cab019bd81347026bf6e3c349e7e433f75b2a654c7a74870c792e9846680b2f5910b0366
+"get-starknet-core@npm:4.0.0-next.2":
+  version: 4.0.0-next.2
+  resolution: "get-starknet-core@npm:4.0.0-next.2"
+  checksum: 10c0/cd3cf6af7bc55ee4e4b51225c9131af22897731f46aa2a077ada4cafe73bd8496ef0a9b7d13325520f8dca7e6539262d2933debf25cc6c7845f909411eeae87e
   languageName: node
   linkType: hard
 

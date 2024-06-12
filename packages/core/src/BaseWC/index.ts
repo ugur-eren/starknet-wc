@@ -1,7 +1,16 @@
 import SignClient from '@walletconnect/sign-client';
 import type {SessionTypes} from '@walletconnect/types';
-import {constants} from 'starknet';
+import {
+  AccountInterface,
+  ProviderInterface,
+  RpcProvider,
+  SignerInterface,
+  constants,
+} from 'starknet';
 import {Connector} from '../Base';
+import {ConnectorNotConnectedError} from '../Base/errors';
+import {IStarknetRpc, StarknetRemoteSigner} from './signer';
+import {StarknetRemoteAccount} from './account';
 
 export type BaseAdapterConstructorOptions = {
   wcProjectId: string;
@@ -12,6 +21,7 @@ export type BaseAdapterConstructorOptions = {
   url?: string;
   icons?: string[];
   rpcUrl?: string;
+  provider?: ProviderInterface;
 };
 
 export abstract class BaseWCConnector extends Connector {
@@ -19,12 +29,25 @@ export abstract class BaseWCConnector extends Connector {
 
   public namespace = 'starknet';
   protected signClient!: SignClient;
-  protected topic?: string;
+  protected session?: SessionTypes.Struct;
+
+  private walletRpc: IStarknetRpc;
+  private remoteSigner: SignerInterface;
+  public provider: ProviderInterface;
+  public currentAccount?: AccountInterface;
 
   constructor(options: BaseAdapterConstructorOptions) {
     super();
 
     this.options = options;
+
+    this.walletRpc = new Proxy({} as IStarknetRpc, {
+      get: (_, method: string) => (params: unknown) => this.requestWallet({method, params}),
+    });
+
+    this.remoteSigner = new StarknetRemoteSigner(this.walletRpc);
+
+    this.provider = this.options.provider ?? new RpcProvider({nodeUrl: this.options.rpcUrl});
   }
 
   /** Handle the connection externally. */
@@ -57,6 +80,11 @@ export abstract class BaseWCConnector extends Connector {
         icons: this.options.icons ?? [],
       },
     });
+
+    this.signClient.on('session_delete', () => {
+      this.session = undefined;
+      this.currentAccount = undefined;
+    });
   }
 
   protected getValidAccounts(session: SessionTypes.Struct): string[] {
@@ -84,8 +112,11 @@ export abstract class BaseWCConnector extends Connector {
     return true;
   }
 
-  /** Whether connector is already authorized */
-  abstract ready(): Promise<boolean>;
+  public async ready() {
+    await this.connect();
+
+    return !!this.signClient;
+  }
 
   public async connect() {
     if (!this.signClient) await this.initSignClient();
@@ -108,35 +139,63 @@ export abstract class BaseWCConnector extends Connector {
 
     await this.handleConnection(uri);
 
-    const result = await approval();
+    this.session = await approval();
 
-    const connectedAccounts = this.getValidAccounts(result);
+    const [account] = this.getValidAccounts(this.session);
 
-    if (!this.isValidChain(result)) throw new Error('Invalid chain');
+    if (!this.isValidChain(this.session)) throw new Error('Invalid chain');
 
-    this.topic = result.topic;
+    if (!account) throw new ConnectorNotConnectedError();
+
+    this.currentAccount = new StarknetRemoteAccount(
+      this.provider,
+      account,
+      this.remoteSigner,
+      this.walletRpc,
+    );
 
     return {
-      account: connectedAccounts[0],
+      account,
       chainId: BigInt(this.chain),
     };
   }
 
   public async disconnect() {
-    if (!this.signClient || !this.topic) return;
+    if (!this.session) return;
 
     await this.signClient.disconnect({
-      topic: this.topic,
+      topic: this.session.topic,
       reason: {
         code: 0,
         message: 'User initiated disconnect',
       },
     });
+
+    this.signClient = undefined as unknown as SignClient;
+    this.currentAccount = undefined;
   }
 
   /** Get current account. */
-  abstract account(): Promise<AccountInterface>;
+  public async account() {
+    if (!this.currentAccount) {
+      throw new ConnectorNotConnectedError();
+    }
+
+    return this.currentAccount;
+  }
 
   /** Get current chain id. */
-  abstract chainId(): Promise<bigint>;
+  public async chainId() {
+    return BigInt(this.chain);
+  }
+
+  private async requestWallet(request: {method: string; params: any}) {
+    if (!this.session) throw new Error('No session');
+
+    return this.signClient.request({
+      topic: this.session.topic,
+      chainId: this.chain,
+      request,
+    });
+  }
 }
