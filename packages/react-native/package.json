@@ -16,6 +16,7 @@
     "fix": "yarn format && yarn lint:fix"
   },
   "peerDependencies": {
+    "react": ">=18.0.0",
     "react-native": ">=0.70.0",
     "starknet": ">=5.0.0"
   },

@@ -8338,6 +8338,7 @@ __metadata:
     tsup: "npm:^8.1.0"
     typescript: "npm:^5.4.5"
   peerDependencies:
+    react: ">=18.0.0"
     react-native: ">=0.70.0"
     starknet: ">=5.0.0"
   languageName: unknown

@@ -12,7 +12,7 @@ import {ConnectorNotConnectedError} from '../Base/errors';
 import {IStarknetRpc, StarknetRemoteSigner} from './signer';
 import {StarknetRemoteAccount} from './account';
 
-export type BaseAdapterConstructorOptions = {
+export type BaseWCConnectorConstructorOptions = {
   wcProjectId: string;
   chain: constants.NetworkName;
 
@@ -25,7 +25,7 @@ export type BaseAdapterConstructorOptions = {
 };
 
 export abstract class BaseWCConnector extends Connector {
-  public options: BaseAdapterConstructorOptions;
+  public options: BaseWCConnectorConstructorOptions;
 
   public namespace = 'starknet';
   protected signClient!: SignClient;
@@ -36,7 +36,7 @@ export abstract class BaseWCConnector extends Connector {
   public provider: ProviderInterface;
   public currentAccount?: AccountInterface;
 
-  constructor(options: BaseAdapterConstructorOptions) {
+  constructor(options: BaseWCConnectorConstructorOptions) {
     super();
 
     this.options = options;
@@ -51,7 +51,7 @@ export abstract class BaseWCConnector extends Connector {
   }
 
   /** Handle the connection externally. */
-  abstract handleConnection(uri: string): Promise<void>;
+  protected abstract handleConnection(uri: string): Promise<void>;
 
   /** Returns chain name without underscore, eg SNMAIN */
   protected get chain(): string {
