@@ -4,7 +4,7 @@ import {useAdapterContext} from './internal/useAdapterContext';
 import {ArgentMobileConnector} from '../adapters/ArgentMobile';
 
 export const useArgentMobileAdapter = () => {
-  const {showModal, hideModal} = useAdapterContext();
+  const {showModal} = useAdapterContext();
 
   const handleConnection = useCallback(
     async (uri: string) => {
