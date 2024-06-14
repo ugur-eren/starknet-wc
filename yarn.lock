@@ -837,20 +837,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@starknet-wc/core@file:../core::locator=%40starknet-wc%2Freact%40workspace%3Apackages%2Freact":
-  version: 0.0.0
-  resolution: "@starknet-wc/core@file:../core#../core::hash=38701a&locator=%40starknet-wc%2Freact%40workspace%3Apackages%2Freact"
-  dependencies:
-    "@walletconnect/sign-client": "npm:^2.13.0"
-    eventemitter3: "npm:^5.0.1"
-    get-starknet-core: "npm:4.0.0-next.2"
-  peerDependencies:
-    starknet: ">=5.0.0"
-  checksum: 10c0/9ed0e17a6252f72e7d4749b9474894d2fe4843f6053357ff3d576a1c4735d2042aa0e5994adff8e68189e8542db6099744df0f0e0ccb6103ec8a7bdcfab0da6a
-  languageName: node
-  linkType: hard
-
-"@starknet-wc/core@workspace:packages/core":
+"@starknet-wc/core@npm:*, @starknet-wc/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@starknet-wc/core@workspace:packages/core"
   dependencies:
@@ -872,7 +859,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@starknet-wc/react@workspace:packages/react"
   dependencies:
-    "@starknet-wc/core": "file:../core"
+    "@starknet-wc/core": "npm:*"
     "@types/react": "npm:^18.2.0"
     "@walletconnect/types": "npm:^2.13.0"
     eslint: "npm:^8.7.0"
