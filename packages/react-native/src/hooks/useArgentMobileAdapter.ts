@@ -1,5 +1,5 @@
 import {useCallback} from 'react';
-import {BaseWCConnectorConstructorOptions} from 'core';
+import {BaseWCConnectorConstructorOptions} from '@starknet-wc/core';
 import {useAdapterContext} from './internal/useAdapterContext';
 import {ArgentMobileConnector} from '../adapters/ArgentMobile';
 

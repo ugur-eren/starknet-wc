@@ -1,6 +1,5 @@
 {
-  "name": "react-native",
-  "private": true,
+  "name": "@starknet-wc/react-native",
   "version": "0.0.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -21,7 +20,7 @@
     "starknet": ">=5.0.0"
   },
   "dependencies": {
-    "core": "workspace:*"
+    "@starknet-wc/core": "file:../core"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

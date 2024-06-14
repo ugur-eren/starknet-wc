@@ -1,6 +1,5 @@
 {
-  "name": "core",
-  "private": true,
+  "name": "@starknet-wc/core",
   "version": "0.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

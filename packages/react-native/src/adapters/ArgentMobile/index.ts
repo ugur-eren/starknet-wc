@@ -1,4 +1,4 @@
-import {BaseWCConnector, type BaseWCConnectorConstructorOptions} from 'core';
+import {BaseWCConnector, type BaseWCConnectorConstructorOptions} from '@starknet-wc/core';
 import {DEFAULT_ARGENT_MOBILE_ICON} from './constants';
 
 export class ArgentMobileConnector extends BaseWCConnector {
