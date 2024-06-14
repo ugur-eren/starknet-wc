@@ -1,1 +1,1 @@
-# React Native Starknet Adapter
+# Starknet Wallet Connect Core

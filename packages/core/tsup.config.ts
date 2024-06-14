@@ -24,6 +24,6 @@ export default defineConfig([
     outDir: 'dist',
     sourcemap: true,
     clean: false,
-    globalName: 'adapter.core',
+    globalName: 'starknetwc.core',
   }),
 ]);

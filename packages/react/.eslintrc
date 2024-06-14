@@ -3,7 +3,7 @@
  */
 {
   "extends": ["../../.eslintrc", "plugin:react/jsx-runtime"],
-  "plugins": ["react", "react-hooks", "jsx-a11y"],
+  "plugins": ["react", "react-hooks"],
   "env": {
     "node": false,
     "browser": true,
@@ -20,8 +20,6 @@
     "react/require-default-props": "off",
     "react/destructuring-assignment": "warn",
     "react/jsx-one-expression-per-line": "off",
-    "jsx-a11y/alt-text": "warn",
-    "jsx-a11y/label-has-associated-control": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {

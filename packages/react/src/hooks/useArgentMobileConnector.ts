@@ -1,10 +1,10 @@
 import {useCallback} from 'react';
 import {BaseWCConnectorConstructorOptions} from '@starknet-wc/core';
-import {useAdapterContext} from './internal/useAdapterContext';
-import {ArgentMobileConnector} from '../adapters/ArgentMobile';
+import {useConnectorContext} from './internal/useConnectorContext';
+import {ArgentMobileConnector} from '../connectors/ArgentMobile';
 
-export const useArgentMobileAdapter = () => {
-  const {showModal, hideModal} = useAdapterContext();
+export const useArgentMobileConnector = () => {
+  const {showModal, hideModal} = useConnectorContext();
 
   const handleConnection = useCallback(
     async (uri: string) => {
@@ -17,12 +17,12 @@ export const useArgentMobileAdapter = () => {
     [showModal, hideModal],
   );
 
-  const argentMobileAdapter = useCallback(
+  const argentMobileConnector = useCallback(
     (options: BaseWCConnectorConstructorOptions) => {
       return new ArgentMobileConnector(options, handleConnection);
     },
     [handleConnection],
   );
 
-  return argentMobileAdapter;
+  return argentMobileConnector;
 };

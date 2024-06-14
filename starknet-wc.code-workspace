@@ -9,8 +9,8 @@
       "path": "packages/core",
     },
     {
-      "name": "React Native",
-      "path": "packages/react-native",
+      "name": "React",
+      "path": "packages/react",
     },
   ],
   "settings": {

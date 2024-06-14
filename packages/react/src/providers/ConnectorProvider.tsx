@@ -1,18 +1,18 @@
 import {createContext, useCallback, useMemo, useState} from 'react';
 
-export type AdapterContextType = {
+export type ConnectorContextType = {
   showModal: (uri: string) => void;
   hideModal: () => void;
 };
 
-export const AdapterContext = createContext<AdapterContextType | null>(null);
+export const ConnectorContext = createContext<ConnectorContextType | null>(null);
 
-export type AdapterProviderProps = {
+export type ConnectorProviderProps = {
   modal: React.FC<{url: string}>;
   children?: React.ReactNode;
 };
 
-export const AdapterProvider: React.FC<AdapterProviderProps> = ({modal: Modal, children}) => {
+export const ConnectorProvider: React.FC<ConnectorProviderProps> = ({modal: Modal, children}) => {
   const [modalUrl, setModalUrl] = useState<string | null>(null);
 
   const showModal = useCallback((url: string) => {
@@ -26,10 +26,10 @@ export const AdapterProvider: React.FC<AdapterProviderProps> = ({modal: Modal, c
   const context = useMemo(() => ({showModal, hideModal}), [showModal, hideModal]);
 
   return (
-    <AdapterContext.Provider value={context}>
+    <ConnectorContext.Provider value={context}>
       {children}
 
       {modalUrl && <Modal url={modalUrl} />}
-    </AdapterContext.Provider>
+    </ConnectorContext.Provider>
   );
 };
