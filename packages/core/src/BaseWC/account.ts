@@ -14,17 +14,13 @@ import {Account} from 'starknet';
 import {IStarknetRpc} from './signer';
 
 export class StarknetRemoteAccount extends Account implements AccountInterface {
-  private wallet: IStarknetRpc;
-
   constructor(
     provider: ProviderInterface,
     address: string,
     signer: SignerInterface,
-    wallet: IStarknetRpc,
+    private wallet: IStarknetRpc,
   ) {
     super(provider, address, signer);
-
-    this.wallet = wallet;
   }
 
   public async execute(

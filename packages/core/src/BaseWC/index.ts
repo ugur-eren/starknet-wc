@@ -42,7 +42,12 @@ export abstract class BaseWCConnector extends Connector {
     this.options = options;
 
     this.walletRpc = new Proxy({} as IStarknetRpc, {
-      get: (_, method: string) => (params: unknown) => this.requestWallet({method, params}),
+      get: (_, method: string) => {
+        // Somehow toJSON is called on the proxy object, so we need to ignore it
+        if (method === 'toJSON') return undefined;
+
+        return (params: unknown) => this.requestWallet({method, params});
+      },
     });
 
     this.remoteSigner = new StarknetRemoteSigner(this.walletRpc);
@@ -51,7 +56,7 @@ export abstract class BaseWCConnector extends Connector {
   }
 
   /** Handle the connection externally. */
-  protected abstract handleConnection(uri: string): Promise<void>;
+  protected abstract handleConnection(uri: string): Promise<() => void>;
 
   /** Returns chain name without underscore, eg SNMAIN */
   protected get chain(): string {
@@ -137,7 +142,7 @@ export abstract class BaseWCConnector extends Connector {
 
     if (!uri) throw new Error('Could not get WC connection URI');
 
-    await this.handleConnection(uri);
+    const handleCleanup = await this.handleConnection(uri);
 
     this.session = await approval();
 
@@ -146,6 +151,8 @@ export abstract class BaseWCConnector extends Connector {
     if (!this.isValidChain(this.session)) throw new Error('Invalid chain');
 
     if (!account) throw new ConnectorNotConnectedError();
+
+    handleCleanup();
 
     this.currentAccount = new StarknetRemoteAccount(
       this.provider,
@@ -156,7 +163,7 @@ export abstract class BaseWCConnector extends Connector {
 
     return {
       account,
-      chainId: BigInt(this.chain),
+      chainId: BigInt(constants.StarknetChainId[this.options.chain]),
     };
   }
 
@@ -186,7 +193,7 @@ export abstract class BaseWCConnector extends Connector {
 
   /** Get current chain id. */
   public async chainId() {
-    return BigInt(this.chain);
+    return BigInt(constants.StarknetChainId[this.options.chain]);
   }
 
   private async requestWallet(request: {method: string; params: any}) {
@@ -194,7 +201,7 @@ export abstract class BaseWCConnector extends Connector {
 
     return this.signClient.request({
       topic: this.session.topic,
-      chainId: this.chain,
+      chainId: this.namespaceChain,
       request,
     });
   }

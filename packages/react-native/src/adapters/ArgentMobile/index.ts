@@ -13,11 +13,11 @@ export class ArgentMobileConnector extends BaseWCConnector {
     return true;
   }
 
-  protected handleConnection: (uri: string) => Promise<void>;
+  protected handleConnection: (uri: string) => Promise<() => void>;
 
   constructor(
     options: BaseWCConnectorConstructorOptions,
-    handleConnection: (uri: string) => Promise<void>,
+    handleConnection: (uri: string) => Promise<() => void>,
   ) {
     super(options);
 
