@@ -1,6 +1,6 @@
 {
   "name": "@starknet-wc/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
@@ -13,7 +13,8 @@
     "lint:fix": "yarn lint --fix",
     "ts:check": "tsc --noEmit",
     "check": "yarn format:check && yarn lint && yarn ts:check",
-    "fix": "yarn format && yarn lint:fix"
+    "fix": "yarn format && yarn lint:fix",
+    "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
     "starknet": ">=6.0.0"
