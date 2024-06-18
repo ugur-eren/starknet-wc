@@ -8,7 +8,7 @@ export type ConnectorContextType = {
 export const ConnectorContext = createContext<ConnectorContextType | null>(null);
 
 export type ConnectorProviderProps = {
-  modal: React.FC<{url: string}>;
+  modal: React.FC<{url: string; hideModal: () => void}>;
   children?: React.ReactNode;
 };
 
@@ -29,7 +29,7 @@ export const ConnectorProvider: React.FC<ConnectorProviderProps> = ({modal: Moda
     <ConnectorContext.Provider value={context}>
       {children}
 
-      {modalUrl && <Modal url={modalUrl} />}
+      {modalUrl && <Modal url={modalUrl} hideModal={hideModal} />}
     </ConnectorContext.Provider>
   );
 };
