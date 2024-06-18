@@ -16,7 +16,7 @@
   },
   "peerDependencies": {
     "react": ">=18.0.0",
-    "starknet": ">=5.0.0"
+    "starknet": ">=6.0.0"
   },
   "dependencies": {
     "@starknet-wc/core": "*"
@@ -29,7 +29,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^3.2.5",
     "react": "18.2.0",
-    "starknet": "5.24.3",
+    "starknet": "^6.9.0",
     "tsup": "^8.1.0",
     "typescript": "^5.4.5"
   },
