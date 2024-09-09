@@ -7,7 +7,9 @@
   ],
   "scripts": {
     "dev": "yarn workspaces foreach -At run dev",
-    "build": "yarn workspaces foreach -At run build"
+    "build": "yarn workspaces foreach -At run build",
+    "check": "yarn workspaces foreach -At run check",
+    "release": "yarn workspaces foreach -At run semantic-release"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.55.0",
@@ -27,6 +29,6 @@
   },
   "packageManager": "yarn@4.2.2",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }

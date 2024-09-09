@@ -4,7 +4,7 @@ import type {
   InvocationsDetails,
   InvokeFunctionResponse,
   Signature,
-  typedData,
+  TypedData,
   DeclareSignerDetails,
   DeployAccountSignerDetails,
   Invocation,
@@ -16,7 +16,7 @@ import type {
 export interface IStarknetRpc {
   starknet_signTypedData(params: {
     accountAddress: string;
-    typedData: typedData.TypedData;
+    typedData: TypedData;
   }): Promise<{signature: Signature}>;
   starknet_requestAddInvokeTransaction(params: {
     accountAddress: string;
@@ -36,10 +36,7 @@ export class StarknetRemoteSigner implements SignerInterface {
     throw new Error('Not supported via Argent Login');
   }
 
-  public async signMessage(
-    typedData: typedData.TypedData,
-    accountAddress: string,
-  ): Promise<Signature> {
+  public async signMessage(typedData: TypedData, accountAddress: string): Promise<Signature> {
     const {signature} = await this.wallet.starknet_signTypedData({
       accountAddress,
       typedData,
